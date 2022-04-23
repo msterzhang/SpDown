@@ -235,7 +235,12 @@ func (dl *Downloader) DownloadM3u8(startTime time.Time) error {
 		utils.Err(err.Error())
 		return err
 	}
-	pool := gpool.New(dl.Threads)
+	//防止创建的线程数比任务总量多
+	thSize := dl.Threads
+	if len(tsList) < dl.Threads {
+		thSize = len(tsList)
+	}
+	pool := gpool.New(thSize)
 	WorkPath, _ := os.Getwd()
 	tsPath := WorkPath + "/cache/" + id
 	bar := progressbar.Default(int64(len(tsList)))
