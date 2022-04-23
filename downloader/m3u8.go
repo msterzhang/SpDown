@@ -196,8 +196,14 @@ func (dl *Downloader) MergeFile(tsPath string) {
 			utils.Err(err.Error())
 		}
 	}
-	//删除缓存目录
+	//删除ts缓存目录
 	err = os.RemoveAll(tsPath)
+	if err != nil {
+		utils.Err(err.Error())
+	}
+	//删除缓存目录
+	WorkPath, _ := os.Getwd()
+	err = os.RemoveAll(WorkPath + "/cache")
 	if err != nil {
 		utils.Err(err.Error())
 	}
