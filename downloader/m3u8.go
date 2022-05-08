@@ -45,7 +45,7 @@ func (dl *Downloader) ChunkM3u8(body string) error {
 }
 
 //GetM3u8Bash 当m3u8中没有完整链接时候需要获取m3u8文件前缀来拼接ts下载链接
-func (dl *Downloader) GetM3u8Bash(body string) string {
+func (dl *Downloader) GetM3u8Bash() string {
 	u, err := url.Parse(dl.Url)
 	if err != nil {
 		utils.Err(err.Error())
@@ -57,7 +57,7 @@ func (dl *Downloader) GetM3u8Bash(body string) string {
 
 // GetTsList 解析ts下载链接
 func (dl *Downloader) GetTsList(body string) []TsInfo {
-	bash := dl.GetM3u8Bash(body)
+	bash := dl.GetM3u8Bash()
 	lines := strings.Split(body, "\n")
 	index := 0
 	tsList := []TsInfo{}
@@ -226,7 +226,7 @@ func (dl *Downloader) DownloadM3u8(startTime time.Time) error {
 		utils.Err(err.Error())
 		return err
 	}
-	bash := dl.GetM3u8Bash(body)
+	bash := dl.GetM3u8Bash()
 	key := dl.GetM3u8Key(bash, body)
 	tsList := dl.GetTsList(body)
 	id := uuid.New().String()
