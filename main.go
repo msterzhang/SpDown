@@ -75,16 +75,9 @@ func server() {
 			if len(rf) == 0 {
 				rf = url
 			}
-			download := &downloader.Downloader{
-				Threads:  thread,
-				Client:   &http.Client{},
-				Filename: file,
-				Url:      url,
-				UA:       ua,
-				CK:       ck,
-				RF:       rf,
-				OG:       og,
-			}
+			client := &http.Client{}
+			download := downloader.NewDownloader(client, file, url, ua, og, rf, ck, thread)
+
 			startTime := time.Now()
 			if strings.Contains(download.Url, ".m3u8") {
 				return download.DownloadM3u8(startTime)
