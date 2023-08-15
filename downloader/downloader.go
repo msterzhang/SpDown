@@ -1,7 +1,7 @@
 package downloader
 
 import (
-	"SpDown/utils"
+	"github.com/msterzhang/SpDown/utils"
 	"fmt"
 	"github.com/msterzhang/gpool"
 	"github.com/schollz/progressbar/v3"

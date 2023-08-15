@@ -9,8 +9,8 @@
 package main
 
 import (
-	"SpDown/downloader"
-	"SpDown/utils"
+	"github.com/msterzhang/SpDown/downloader"
+	"github.com/msterzhang/SpDown/utils"
 	"errors"
 	"github.com/urfave/cli"
 	"net/http"

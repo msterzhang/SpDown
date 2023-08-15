@@ -2,7 +2,7 @@
 package downloader
 
 import (
-	"SpDown/config"
+	"github.com/msterzhang/SpDown/config"
 	"net/http"
 )
 

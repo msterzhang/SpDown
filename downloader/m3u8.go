@@ -2,12 +2,9 @@
 package downloader
 
 import (
-	"SpDown/utils"
 	"errors"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/msterzhang/gpool"
-	"github.com/schollz/progressbar/v3"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -15,6 +12,11 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/msterzhang/SpDown/utils"
+	"github.com/msterzhang/gpool"
+	"github.com/schollz/progressbar/v3"
 )
 
 //HttpGet http请求函数
@@ -29,7 +31,7 @@ func (dl *Downloader) HttpGet(url string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
@@ -131,7 +133,7 @@ func (dl *Downloader) DownloadTs(url string, filepath string, key string, bar *p
 		return
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		pool.Done()
 		utils.Err(err.Error())
